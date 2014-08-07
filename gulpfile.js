@@ -20,7 +20,8 @@ gulp.task('watch', function() {
 gulp.task('stylus', function() {
     gulp.src('./css/**/*.styl')
         .pipe(stylus({
-            use: [nib()],import: ['nib']
+            use: [nib()],
+            import: ['nib']
         }))
         .pipe(gulp.dest('./css'));
 });

@@ -1,1 +1,137 @@
 @import 'normalize.css'
+
+view-height = 710px
+view-width = 960px
+left-width = view-width - view-height - 20
+
+body
+	background url(../img/dark_wood.png)
+
+section
+	background #999
+	height view-height
+	padding 10px
+	width view-width
+	border-radius 5px
+	box-shadow 0 0 20px #aaa
+	position fixed
+	top 50%
+	left 50%
+	position absolute
+	margin-top -(view-height/2)
+	margin-left -(view-width/2)
+
+
+.left-block
+	float left
+	height view-height
+	padding 5px
+	width left-width
+
+.count
+	font-size view-height*.08
+	height view-height*.1
+	line-height view-height*.1
+	margin 0 auto
+	text-align center
+	box-shadow 0 5px 5px #555, 0 -3px 5px #555
+	border-radius 5px
+
+.player-info
+	height view-height*.3
+	margin 10px auto
+	box-shadow 0 5px 5px #555, 0 -3px 5px #555 
+	border-radius 5px
+	padding 10px
+	position relative
+	input
+		background #bbb
+		border none
+		border-radius 5px
+		box-shadow inset 0 1px 1px #000, inset 0 -1px 1px #000
+		color red
+		display block;
+		margin 0 auto;
+		padding 3px 5px
+		text-align center
+		width left-width*.8
+		font-weight bold
+	.name
+	.time
+	.destroy-count-text
+		margin 5px auto;
+		font-size view-height*.03
+		height view-height*.03
+		line-height view-height*.03
+		text-align center
+	.destroy-count-text
+		margin-top view-height*.05
+	.destroy-count
+		position absolute
+		bottom 5px
+		width left-width*.9
+		font-size view-height*.1
+		height view-height*.15
+		line-height view-height*.15
+		text-align center
+
+.start-button
+	height view-height*.1
+	margin 30px auto
+	font-size view-height*.04
+	text-align center
+	line-height view-height*.1
+	box-shadow 0 5px 5px #555, 0 -3px 5px #555 
+	border-radius 5px
+
+
+.disabled
+	border 2px solid #aaa
+
+content
+	border-radius 5px
+	float right
+	height view-height
+	overflow hidden
+	width view-height
+
+.row:nth-child(2n) 
+	.field:nth-child(even) 
+		background url(../img/sv_kletka.gif) no-repeat
+		background-size cover
+.row:nth-child(2n) 
+	.field:nth-child(odd) 
+		background url(../img/tem_kletka.gif) no-repeat
+		background-size cover
+.row:nth-child(2n-1) 
+	.field:nth-child(odd) 
+		background url(../img/sv_kletka.gif) no-repeat
+		background-size cover
+.row:nth-child(2n-1) 
+	.field:nth-child(even) 
+		background url(../img/tem_kletka.gif) no-repeat
+		background-size cover
+
+.field
+	float left
+	height (view-height/8)
+	margin 0
+	padding 0
+	width (view-height/8)
+
+@media only screen and (max-width:960px)
+	.left-block
+		display none
+	content
+		float left
+	section
+		width view-height
+		margin-top -(view-height/2)
+		margin-left -(view-height/2)
+
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5),
+only screen and (-moz-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min-device-pixel-ratio: 1.5) 
+	body
+		background url(../img/dark_wood_@2X.png)
