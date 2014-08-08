@@ -6,6 +6,7 @@ left-width = view-width - view-height - 20
 
 body
 	background url(../img/dark_wood.png)
+	text-shadow 0 0 1px rgba(255,255,255,.6)
 
 section
 	background #999
@@ -36,6 +37,7 @@ section
 	text-align center
 	box-shadow 0 5px 5px #555, 0 -3px 5px #555
 	border-radius 5px
+	font-weight bold
 
 .player-info
 	height view-height*.3
@@ -64,6 +66,7 @@ section
 		height view-height*.03
 		line-height view-height*.03
 		text-align center
+		font-weight bold
 	.destroy-count-text
 		margin-top view-height*.05
 	.destroy-count
@@ -76,17 +79,19 @@ section
 		text-align center
 
 .start-button
+	font-weight bold
 	height view-height*.1
 	margin 30px auto
 	font-size view-height*.04
+	line-height view-height*.1
 	text-align center
 	line-height view-height*.1
-	box-shadow 0 5px 5px #555, 0 -3px 5px #555 
+	box-shadow inset 0 1px 5px 2px #777, 0 5px 5px #555,inset 0 0 20px 1px #eee 
 	border-radius 5px
-
-
-.disabled
-	border 2px solid #aaa
+	cursor pointer
+	&:active
+	&:hover
+		box-shadow 0 1px 5px 2px #777,inset 0 5px 5px #555
 
 content
 	border-radius 5px
@@ -94,6 +99,21 @@ content
 	height view-height
 	overflow hidden
 	width view-height
+	position relative
+.cover-board
+	position absolute
+	height 100%
+	width 100%
+	background rgba(0,0,0,.8)
+	text-align center
+	font-size (view-height*.07)
+	.start-checkers 
+		position absolute
+		color #666
+		height (view-height/2)
+		width 100%
+		top 50%
+		margin-top -(view-height/4)
 
 .row:nth-child(2n) 
 	.field:nth-child(even) 
@@ -111,19 +131,54 @@ content
 	.field:nth-child(even) 
 		background url(../img/tem_kletka.gif) no-repeat
 		background-size cover
+
+.row:first-child .field:first-child,
+.row:first-child .field:last-child,
+.row:last-child .field:first-child,
+.row:last-child .field:last-child
+	height 20px
+	width 20px
+
+.row:first-child .field,
+.row:last-child .field
+	width ((view-height - 40)/8)
+	height 20px
+	line-height 20px
+
+.field:first-child,
+.field:last-child
+	width 20px
+	height ((view-height - 40)/8)
+	line-height ((view-height - 40)/8)
 
 .field
 	float left
-	height (view-height/8)
+	height ((view-height - 40)/8)
 	margin 0
 	padding 0
-	width (view-height/8)
+	width ((view-height - 40)/8)
+	text-align center
+	font-size view-height*.03
+.dark-draught
+	background url(../img/tem_shashka.gif) no-repeat 50% 50%
+	background-size cover
+	height ((view-height - 40)/8)
+	width ((view-height - 40)/8)
+	border-radius 50%
+.white-draught
+	@extend .dark-draught
+	background-image url(../img/sv_shashka.gif)
+.can-move
+	box-shadow inset 0 0px 10px 2px green
+.selected
+	box-shadow inset 0 0px 10px 2px red
+.posible-move
+	box-shadow inset 0 0 20px 5px yellow
+
 
 @media only screen and (max-width:960px)
 	.left-block
 		display none
-	content
-		float left
 	section
 		width view-height
 		margin-top -(view-height/2)
