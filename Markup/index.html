@@ -9,10 +9,30 @@
 
 <body>
     <section>
-<div left-panel></div>
+        <aside class="left-block">
+            <div class="count">0:0</div>
+            <div class="player-info">
+                <input type="text" style="display:none;">
+                <div class="name">Игрок №1</div>
+                <div class="time">00:00</div>
+                <div class="destroy-count-text">Шашек срублено</div>
+                <div class="destroy-count">0</div>
+            </div>
+            <div class="player-info">
+                <input type="text" value="Игрок №2" placeholder="Введите имя">
+                <div class="time">00:00</div>
+                <div class="destroy-count-text">Шашек срублено</div>
+                <div class="destroy-count">5</div>
+            </div>
+            <div class="start-button">Начать заново!</div>
+        </aside>
         <content>
-        <div start-game></div>
-<!--        <div class="cover-board">
+<!--             <div class="cover-board">
+                <div class="start-checkers">
+                    <p>Кликните для начала игры</p>
+                </div>
+            </div>
+            <div class="cover-board">
                 <div class="start-checkers">
                     <p>Победил Игрок №2</p>
                     <p>общий счет 3:2</p>
@@ -191,24 +211,7 @@
             </div>
         </content>
     </section>
-<script src="js/lib/angular.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
-<script src="js/lib/angular-local-storage.js"></script>
-<script src="js/checkersApp/module.js"></script>
-<script src="js/mainApp/module.js"></script>
-<script src="js/mainApp/config.js"></script>
-<script src="js/mainApp/directives/leftPanel.js"></script>
-<script src="js/mainApp/directives/startGame.js"></script>
-<script src="js/mainApp/directives/restartGame.js"></script>
-<script src="js/mainApp/directives/playerInfo.js"></script>
-<script src="js/mainApp/directives/timer.js"></script>
-<script src="js/mainApp/directives/count.js"></script>
-<script src="js/mainApp/services/breadcaster.js"></script>
-<script src="js/mainApp/services/dataModel.js"></script>
-<script src="js/mainApp/services/dataStorage.js"></script>
-<script src="js/mainApp/services/communicationModule.js"></script>
-<script src="js/app.js"></script>
-<script src="js/main.js"></script>
+
 </body>
 
 </html>
