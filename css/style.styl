@@ -138,18 +138,26 @@ content
 .row:last-child .field:last-child
 	height 20px
 	width 20px
+	background url(../img/sv_kletka.gif) no-repeat !important
+	background-size cover !important
 
 .row:first-child .field,
 .row:last-child .field
 	width ((view-height - 40)/8)
 	height 20px
 	line-height 20px
+	background url(../img/sv_kletka.gif) no-repeat !important
+	background-size cover !important
+	box-shadow none
 
 .field:first-child,
 .field:last-child
 	width 20px
 	height ((view-height - 40)/8)
 	line-height ((view-height - 40)/8)
+	box-shadow none
+	background url(../img/sv_kletka.gif) no-repeat !important
+	background-size cover !important
 
 .field
 	float left
@@ -159,6 +167,7 @@ content
 	width ((view-height - 40)/8)
 	text-align center
 	font-size view-height*.03
+	box-shadow inset 0 0px 1px 1px #000
 .dark-draught
 	background url(../img/tem_shashka.gif) no-repeat 50% 50%
 	background-size cover
@@ -170,10 +179,12 @@ content
 	background-image url(../img/sv_shashka.gif)
 .can-move
 	box-shadow inset 0 0px 10px 2px green
+	cursor pointer
 .selected
 	box-shadow inset 0 0px 10px 2px red
 .posible-move
 	box-shadow inset 0 0 20px 5px yellow
+	cursor pointer
 
 
 @media only screen and (max-width:960px)
