@@ -1,3 +1,3 @@
 (function (angular) {
-    angular.module("checkers", []);
+    angular.module("checkers", ['mainApp']);
 })(angular);

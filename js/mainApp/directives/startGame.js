@@ -10,7 +10,6 @@
 
             function ctrlHandler(s, config, communicationModule) {
                 s.startGame = function(game) {
-                    debugger;
                     if (!config.isModuleAvailable(game)) return;
                     s.hide = true;
                     communicationModule.channel.broadcast('start-game', {
