@@ -6,232 +6,31 @@
         var gameName = 'checkers';
 
         var selectedFigure;
+        var playerMove;
+        var playera, playerb;
 
-        function makeDraughts(type, mainDirrection) {
-            var draughts = [];
-            if (type == 2) {
-                draughts.push({
-                    type: 1,
-                    x: 2,
-                    y: 1,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 4,
-                    y: 1,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 6,
-                    y: 1,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 8,
-                    y: 1,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-
-                draughts.push({
-                    type: 1,
-                    x: 1,
-                    y: 2,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 3,
-                    y: 2,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 5,
-                    y: 2,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 7,
-                    y: 2,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-
-                draughts.push({
-                    type: 1,
-                    x: 2,
-                    y: 3,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 4,
-                    y: 3,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 6,
-                    y: 3,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 8,
-                    y: 3,
-                    viewClass: 'dark-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
+        function makeDraught(owner, mainDirrection, x, y) {
+            return {
+                type: 1,
+                owner: owner,
+                x: x,
+                y: y,
+                viewClass: owner == 2 ? 'dark-draught' : 'white-draught',
+                canMove: false,
+                selected: false,
+                mainDirrection: mainDirrection
             }
-            if (type == 1) {
-                draughts.push({
-                    type: 1,
-                    x: 1,
-                    y: 8,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 3,
-                    y: 8,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 5,
-                    y: 8,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 7,
-                    y: 8,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
+        }
 
-                draughts.push({
-                    type: 1,
-                    x: 2,
-                    y: 7,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 4,
-                    y: 7,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 6,
-                    y: 7,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 8,
-                    y: 7,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
+        function makeDraughts(owner, mainDirrection) {
+            var draughts = [];
+            var x, y, base;
+            base = owner == 2 ? 1 : 6;
 
-                draughts.push({
-                    type: 1,
-                    x: 1,
-                    y: 6,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 3,
-                    y: 6,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 5,
-                    y: 6,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
-                draughts.push({
-                    type: 1,
-                    x: 7,
-                    y: 6,
-                    viewClass: 'white-draught',
-                    canMove: false,
-                    selected: false,
-                    mainDirrection: mainDirrection
-                });
+            for (var i = 0; i < 12; i++) {
+                y = (i / 4 >> 0) + base;
+                x = y % 2 == 1 ? (i % 4 + 1) * 2 : (i % 4) * 2 + 1;
+                draughts.push(makeDraught(owner, mainDirrection, x, y));
             }
 
             return draughts;
@@ -248,7 +47,7 @@
             }
         }
 
-        function checkPosition(myx, myy, myclass, mytype, x, y, board) {
+        function checkPosition(myx, myy, myowner, mytype, x, y, board) {
             if (mytype == 1) {
                 if (board[y][x].unreacheble) return {
                     priority: 0,
@@ -260,7 +59,7 @@
                     x: x,
                     y: y
                 };
-                if (board[y][x].value != '' && board[y][x].value.viewClass != myclass) {
+                if (board[y][x].value != '' && board[y][x].value.owner != myowner) {
                     if (board[2 * y - myy][2 * x - myx].unreacheble) return {
                         priority: 0,
                         x: 2 * x - myx,
@@ -293,28 +92,29 @@
 
             //проверка направления движения, в зависимости от цвета пешки
             if (figure.mainDirrection > 0) {
-                priority = checkPosition(figure.x, figure.y, figure.viewClass, figure.type, figure.x + 1, figure.y + 1, board);
+                priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y + 1, board);
                 values.push(priority);
-                values.push(checkPosition(figure.x, figure.y, figure.viewClass, figure.type, figure.x - 1, figure.y + 1, board));
-                priority = checkPosition(figure.x, figure.y, figure.viewClass, figure.type, figure.x - 1, figure.y - 1, board);
-                if (priority.prioryty == 2) values.push(priority);
-                priority = checkPosition(figure.x, figure.y, figure.viewClass, figure.type, figure.x + 1, figure.y - 1, board);
+                values.push(checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y + 1, board));
+                priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y - 1, board);
+                if (priority.priority == 2) values.push(priority);
+                priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y - 1, board);
                 if (priority.priority == 2) values.push(priority);
             }
             if (figure.mainDirrection < 0) {
-                priority = checkPosition(figure.x, figure.y, figure.viewClass, figure.type, figure.x + 1, figure.y - 1, board);
+                priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y - 1, board);
                 values.push(priority);
-                values.push(checkPosition(figure.x, figure.y, figure.viewClass, figure.type, figure.x - 1, figure.y - 1, board));
-                priority = checkPosition(figure.x, figure.y, figure.viewClass, figure.type, figure.x + 1, figure.y + 1, board);
+                values.push(checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y - 1, board));
+                priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y + 1, board);
                 if (priority.priority == 2) values.push(priority);
-                priority = checkPosition(figure.x, figure.y, figure.viewClass, figure.type, figure.x - 1, figure.y + 1, board);
+                priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y + 1, board);
                 if (priority.priority == 2) values.push(priority);
             }
             return values;
         }
 
         function showDraughtsWithMoves(player, board) {
-            if (!player.move) return;
+            if (!player.isMyMove()) return;
+
             //смотрим кто может ходить
             for (var i = 0; i < player.figures.length; i++) {
                 var figure = player.figures[i];
@@ -396,35 +196,77 @@
             return false;
         }
 
+        function cleanDestroyedDaughts(startx, starty, x,y, board){
+            var xDirrection = x-startx>0?1:-1;
+            var yDirrextion = y-starty>0?1:-1;
+            var i = startx, j = starty;
+            while(i!=x&&j!=y){
+                if (board[j][i].value!=''){
+                    playera.removeFigure(board[j][i].value);
+                    playerb.removeFigure(board[j][i].value);
+                    board[j][i].value='';
+                    playerMove.destroyedCount++;
+                }
+                i+=xDirrection;
+                j+=yDirrextion;
+            }
+        }
+
         function makeMove(x, y, board) {
             if (checkMove(x, y, board)) {
                 board[selectedFigure.y][selectedFigure.x].value = '';
+                var old_x = selectedFigure.x;
+                var old_y = selectedFigure.y;
                 selectedFigure.x = x;
                 selectedFigure.y = y;
                 board[selectedFigure.y][selectedFigure.x].value = selectedFigure;
                 cleanPossibleMoves(board);
+                if (selectedFigure.attack) {
+                    cleanDestroyedDaughts(old_x,old_y,x,y,board);
+                    //playerMove.save()
+                    clearFigures(playerMove, selectedFigure);
+                    showDraughtPosibleMovies(selectedFigure,board);
+                    if (selectedFigure.attack) { return false;}
+                    else {cleanPossibleMoves(board); return true;}
 
+                }
                 return true;
             }
             return false;
         }
 
-        function clearFigures(player){
-            _.each(player.figures,function(figure){figure.canMove=false;figure.selected = false});
+        function clearFigures(player, except) {
+            _.each(player.figures, function(figure) {
+                if (figure === except) return;
+                figure.canMove = false;
+                figure.selected = false;
+                figure.attack = false;
+            });
         }
 
-        function changeMove(player1,player2){
+        function changeMove(player1, player2) {
             clearFigures(player1);
             clearFigures(player2);
-            if (player1.move) {player1.move = false; player2.move = true; return player2}
-            if (player2.move) {player2.move = false; player1.move = true; return player1}
+            if (player1.isMyMove()) {
+                player1.stopMove();
+                player2.startMove();
+                playerMove = player2;
+                return player2
+            }
+            if (player2.isMyMove()) {
+                player2.stopMove();
+                player1.startMove();
+                playerMove = player1;
+                return player1
+            }
         }
 
         function logic(x, y, player1, player2, board) {
+            playera = player1; playerb = player2;
             selectNew(player1, x, y, board);
             selectNew(player2, x, y, board);
-            if (makeMove(x, y, board)){
-                gameLogic.showDraughtsWithMoves(changeMove(player1,player2),board);
+            if (makeMove(x, y, board)) {
+                gameLogic.showDraughtsWithMoves(changeMove(player1, player2), board);
             }
         }
 
