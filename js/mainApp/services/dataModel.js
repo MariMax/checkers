@@ -56,6 +56,7 @@
             var timerHandler;
             var move = false;
             var defaultName = name;
+            var interval = 1000;
 
             var player = {
                 name: name,
@@ -66,15 +67,13 @@
                 startTimer: function() {
                     var self = this;
                     var timeFunction = function() {
-                            self.timer += 1000;
-                            timerHandler = $timeout(timeFunction, 1000);
+                            self.timer += interval;
+                            timerHandler = $timeout(timeFunction, interval);
                         }
-                        //timerHandler = setInterval(timeFunction,1000);
-                    timerHandler = $timeout(timeFunction, 1000);
+                    timerHandler = $timeout(timeFunction, interval);
                 },
                 stopTimer: function() {
                     $timeout.cancel(timerHandler);
-                    //clearInterval(timerHandler);
                 },
                 removeFigure: function(figure) {
                     var a = _.indexOf(this.figures, figure);
@@ -130,8 +129,7 @@
         var dataModel = {
             clearData: clearData,
             save: save,
-            data: data,
-            board: board
+            data: data
         }
 
         return dataModel;

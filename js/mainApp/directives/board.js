@@ -9,7 +9,7 @@
             };
 
             function ctrlHandler(s,dataModel) {
-                s.board = dataModel.board;
+                s.board = dataModel.data.board;
 
                 s.moveHandler = function(x,y){
                     dataModel.gameLogic(x,y,dataModel.data.player1, dataModel.data.player2, dataModel.data.board);
