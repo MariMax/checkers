@@ -12,7 +12,12 @@
                 s.board = dataModel.data.board;
 
                 s.moveHandler = function(x,y){
-                    dataModel.gameLogic(x,y,dataModel.data.player1, dataModel.data.player2, dataModel.data.board);
+                    var winner = dataModel.gameLogic(x,y,dataModel.data.player1, dataModel.data.player2, dataModel.data.board)
+                    if (winner){
+                        winner.showVictoryFlag();
+                        dataModel.data.player1.stopMove();
+                        dataModel.data.player2.stopMove();
+                    }
                 }
             }
         }

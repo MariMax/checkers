@@ -11,8 +11,15 @@
         function clearData() {
             data.player1.setDefault();
             data.player2.setDefault();
+            data.currentGame = '';
             initEmptyBoard();
             save();
+        }
+
+        function clearLastGameData() {
+            initEmptyBoard();
+            data.player1.clearGameData();
+            data.player2.clearGameData();
         }
 
         function initEmptyBoard() {
@@ -58,18 +65,21 @@
             var defaultName = name;
             var interval = 1000;
 
+
             var player = {
                 name: name,
                 score: 0,
                 timer: 0,
                 destroyedCount: 0,
                 figures: [],
+                victory: false,
+
                 startTimer: function() {
                     var self = this;
-                    var timeFunction = function() {
-                            self.timer += interval;
-                            timerHandler = $timeout(timeFunction, interval);
-                        }
+                    function timeFunction() {
+                        self.timer += interval;
+                        timerHandler = $timeout(timeFunction, interval);
+                    }
                     timerHandler = $timeout(timeFunction, interval);
                 },
                 stopTimer: function() {
@@ -79,6 +89,9 @@
                     var a = _.indexOf(this.figures, figure);
                     if (a >= 0)
                         this.figures.splice(a, 1);
+                },
+                removeAllFigures: function() {
+                    this.figures = [];
                 },
                 startMove: function() {
                     this.startTimer();
@@ -91,13 +104,21 @@
                 isMyMove: function() {
                     return move;
                 },
+                showVictoryFlag: function() {
+                    this.score++;
+                    this.victory = true;
+                },
                 setDefault: function() {
                     this.name = defaultName;
                     this.score = 0;
+                    this.clearGameData();
+                },
+                clearGameData: function() {
                     this.timer = 0;
                     this.destroyedCount = 0;
                     this.figures = [];
                     this.stopMove();
+                    this.victory = 0;
                 }
             }
 
@@ -126,8 +147,14 @@
             dataStorage.save('player2', str);
         }
 
+        function setGame(game) {
+            data.currentGame = game;
+        }
+
         var dataModel = {
             clearData: clearData,
+            clearLastGameData: clearLastGameData,
+            setGame: setGame,
             save: save,
             data: data
         }

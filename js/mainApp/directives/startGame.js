@@ -5,13 +5,14 @@
                 restrict: 'A',
                 replace: true,
                 templateUrl: "js/mainApp/views/startGame.html",
-                controller: ['$scope', 'configuration', 'communicationModule', ctrlHandler]
+                controller: ['$scope', 'dataModel','configuration', 'communicationModule', ctrlHandler]
             };
 
-            function ctrlHandler(s, config, communicationModule) {
+            function ctrlHandler(s, dataModel, config, communicationModule) {
                 s.startGame = function(game) {
                     if (!config.isModuleAvailable(game)) return;
                     s.hide = true;
+                    dataModel.setGame(game);
                     communicationModule.channel.broadcast('start-game', {
                         name: game
                     });

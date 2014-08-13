@@ -11,7 +11,7 @@
 
         function makeDraught(owner, mainDirrection, x, y) {
             return {
-                type: 2,
+                type: 1,
                 owner: owner,
                 x: x,
                 y: y,
@@ -22,44 +22,44 @@
             }
         }
 
-        // function makeDraughts(owner, mainDirrection) {
-        //     var draughts = [];
-        //     var x, y, base;
-        //     base = owner == 2 ? 1 : 6;
-
-        //     for (var i = 0; i < 12; i++) {
-        //         y = (i / 4 >> 0) + base;
-        //         x = y % 2 == 1 ? (i % 4 + 1) * 2 : (i % 4) * 2 + 1;
-        //         draughts.push(makeDraught(owner, mainDirrection, x, y));
-        //     }
-
-        //     return draughts;
-        // }
-
         function makeDraughts(owner, mainDirrection) {
             var draughts = [];
             var x, y, base;
             base = owner == 2 ? 1 : 6;
 
-            if (owner == 1) {
-                // draughts.push(makeDraught(owner, mainDirrection, 5, 4));
-                draughts.push(makeDraught(owner, mainDirrection, 5, 4));
+            for (var i = 0; i < 12; i++) {
+                y = (i / 4 >> 0) + base;
+                x = y % 2 == 1 ? (i % 4 + 1) * 2 : (i % 4) * 2 + 1;
+                draughts.push(makeDraught(owner, mainDirrection, x, y));
             }
-            if (owner == 2) {
-                // draughts.push(makeDraught(owner, mainDirrection, 2, 5));
-                // draughts.push(makeDraught(owner, mainDirrection, 4, 5));
-                // draughts.push(makeDraught(owner, mainDirrection, 6, 3));
-                draughts.push(makeDraught(owner, mainDirrection, 2, 5));
-                draughts.push(makeDraught(owner, mainDirrection, 4, 5));
-                draughts.push(makeDraught(owner, mainDirrection, 6, 5));
-                draughts.push(makeDraught(owner, mainDirrection, 6, 7));
-                draughts.push(makeDraught(owner, mainDirrection, 6, 3));
-                draughts.push(makeDraught(owner, mainDirrection, 4, 3));
-            }
-
 
             return draughts;
         }
+
+        // function makeDraughts(owner, mainDirrection) {
+        //     var draughts = [];
+        //     var x, y, base;
+        //     base = owner == 2 ? 1 : 6;
+
+        //     if (owner == 1) {
+        //         // draughts.push(makeDraught(owner, mainDirrection, 5, 4));
+        //         draughts.push(makeDraught(owner, mainDirrection, 5, 4));
+        //     }
+        //     if (owner == 2) {
+        //         // draughts.push(makeDraught(owner, mainDirrection, 2, 5));
+        //         // draughts.push(makeDraught(owner, mainDirrection, 4, 5));
+        //         // draughts.push(makeDraught(owner, mainDirrection, 6, 3));
+        //         draughts.push(makeDraught(owner, mainDirrection, 2, 5));
+        //         draughts.push(makeDraught(owner, mainDirrection, 4, 5));
+        //         draughts.push(makeDraught(owner, mainDirrection, 6, 5));
+        //         draughts.push(makeDraught(owner, mainDirrection, 6, 7));
+        //         draughts.push(makeDraught(owner, mainDirrection, 6, 3));
+        //         draughts.push(makeDraught(owner, mainDirrection, 4, 3));
+        //     }
+
+
+        //     return draughts;
+        // }
 
         function fillBoard(player1, player2, board) {
             fillForPlayer(player1, board);
@@ -107,7 +107,7 @@
                     y: y
                 }];
             }
-            //написать алгоритм проверки ходов для дамки
+            //алгоритм проверки ходов для дамки
             else return checkQuinPosition(myx, myy, myowner, x, y, board)
         }
 
@@ -207,21 +207,21 @@
             //проверка направления движения, в зависимости от цвета пешки
             if (figure.mainDirrection > 0) {
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y + 1, board);
-                values.push(priority);
-                values.push(checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y + 1, board));
+                values = values.concat(values, priority);
+                values = values.concat(values,checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y + 1, board));
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y - 1, board);
-                if (priority.priority == 2 || draught.type == 2) values.push(priority);
+                if (priority[0].priority == 2 || draught.type == 2) values = values.concat(values, priority);
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y - 1, board);
-                if (priority.priority == 2 || draught.type == 2) values.push(priority);
+                if (priority[0].priority == 2 || draught.type == 2) values = values.concat(values, priority);
             }
             if (figure.mainDirrection < 0) {
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y - 1, board);
                 values = values.concat(values, priority);
                 values = values.concat(values, checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y - 1, board));
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y + 1, board);
-                if (priority.priority == 2 || draught.type == 2) values = values.concat(values, priority);
+                if (priority[0].priority == 2 || draught.type == 2) values = values.concat(values, priority);
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y + 1, board);
-                if (priority.priority == 2 || draught.type == 2) values = values.concat(values, priority);
+                if (priority[0].priority == 2 || draught.type == 2) values = values.concat(values, priority);
             }
             return values;
         }
@@ -241,20 +241,23 @@
             var figureCanAttack = _.any(player.figures, function(figure) {
                 return figure.movePriority.priority == 2;
             })
+            var moveCount = 0;
             if (figureCanAttack) {
                 //ходят только атакующие
                 for (var i = 0; i < player.figures.length; i++) {
                     if (player.figures[i].movePriority.priority < 2) delete player.figures[i].movePriority;
-                    else player.figures[i].canMove = true;
+                    else {player.figures[i].canMove = true;moveCount++;}
                 }
             } else
             //если нет атакующих, то ходят все кто может
                 for (var i = 0; i < player.figures.length; i++) {
                 if (player.figures[i].movePriority.priority == 1) {
                     player.figures[i].canMove = true;
+                    moveCount++;
                     delete player.figures[i].movePriority;
                 }
             }
+            return moveCount;
         }
 
         function cleanPossibleMoves(board) {
@@ -337,8 +340,16 @@
                 selectedFigure.y = y;
                 board[selectedFigure.y][selectedFigure.x].value = selectedFigure;
                 cleanPossibleMoves(board);
+//https://www.gambler.ru/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D1%85_%D1%88%D0%B0%D1%88%D0%B5%D0%BA
+// Если обычная шашка достигает последней горизонтали в результате боя шашки противника 
+// (где ей полагается превращаться в дамку), и если ей предоставляется возможность дальнейшего 
+// взятия вражеских шашек, то она обязана тем же ходом продолжать бой, но уже на правах дамки. 
                 if (selectedFigure.attack) {
                     cleanDestroyedDaughts(old_x, old_y, x, y, board);
+                    if (y==1&&selectedFigure.owner==1||y==8&&selectedFigure.owner==2){
+                        selectedFigure.type = 2;
+                        selectedFigure.viewClass+=' quin';
+                    }
                     //playerMove.save()
                     clearFigures(playerMove ? playerMove : playera, selectedFigure);
                     showDraughtPosibleMovies(selectedFigure, board);
@@ -387,7 +398,8 @@
             selectNew(player1, x, y, board);
             selectNew(player2, x, y, board);
             if (makeMove(x, y, board)) {
-                gameLogic.showDraughtsWithMoves(changeMove(player1, player2), board);
+                var moveCount = gameLogic.showDraughtsWithMoves(changeMove(player1, player2), board);
+                if (moveCount == 0) return changeMove(player1, player2);
             }
         }
 
