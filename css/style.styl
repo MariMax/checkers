@@ -171,15 +171,15 @@ content
 	box-shadow inset 0 0px 1px 1px #000
 .dark-draught
 	background url(../img/checkers.png) no-repeat 0 0
-	background-size 100px
+	background-size ((view-height - 40)/4)
 	height ((view-height - 40)/8)
 	width ((view-height - 40)/8)
 	border-radius 50%
 .white-draught
 	@extend .dark-draught
-	background-position-x -50px
+	background-position-x -((view-height - 35)/8)
 .quin
-	background-position-y -50px
+	background-position-y -((view-height - 35)/8)
 .can-move
 	box-shadow inset 0 0px 10px 2px green
 	cursor pointer

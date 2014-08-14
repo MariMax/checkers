@@ -116,8 +116,7 @@
             var posibleMoves = [];
             var priority = 1;
             //простой ход, без атаки
-            while (board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value == '' 
-                && !board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].unreacheble) {
+            while (board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value == '' && !board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].unreacheble) {
                 posibleMoves.push({
                     x: distance * x - myx * (distance - 1),
                     y: distance * y - myy * (distance - 1),
@@ -136,10 +135,9 @@
                 var closeY = distance * y - myy * (distance - 1);
                 distance++;
                 priority++;
-                while (board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value == '' 
-                    && !board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].unreacheble) {
+                while (board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value == '' && !board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].unreacheble) {
                     //ок, поле свободно, значит приоритет такого хода повышается
-                    if (canAttackAdditionalVictim(distance * x - myx * (distance - 1), distance * y - myy * (distance - 1), closeX, closeY,myowner,board))
+                    if (canAttackAdditionalVictim(distance * x - myx * (distance - 1), distance * y - myy * (distance - 1), closeX, closeY, myowner, board))
                     //если из этой позиции мы можем напасть еще на кого-то, то вообще супер
                         posibleMoves.push({
                         x: distance * x - myx * (distance - 1),
@@ -161,8 +159,8 @@
             })
             if (thirdPriority)
                 _.each(posibleMoves, function(move) {
-                    if (move.priority==2) move.priority=1;
-                    if (move.priority==3) move.priority=2;
+                    if (move.priority == 2) move.priority = 1;
+                    if (move.priority == 3) move.priority = 2;
                 });
             return posibleMoves;
         }
@@ -170,32 +168,27 @@
         function findVictim(myx, myy, x, y, myowner, board, closeX, closeY) {
             var distance = 1;
             //пропускаем пустые клетки
-            while (board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value == '' 
-                && !board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].unreacheble) {
+            while (board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value == '' && !board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].unreacheble) {
                 distance++;
             }
             //уперлись в непустую или край поля
             //если это край поля или своя фишка, то считаем что в данном направлении жертву не нашли
             //или это уже атакуемая фишка
-            if (board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].unreacheble
-                ||board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value.owner==myowner
-                ||(distance * y - myy * (distance - 1)==closeY&&distance * x - myx * (distance - 1)==closeX))
+            if (board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].unreacheble || board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value.owner == myowner || (distance * y - myy * (distance - 1) == closeY && distance * x - myx * (distance - 1) == closeX))
                 return false;
             //если уперлись в непустую клетку - глупое условие, т.к. все пустые отмели ранее
             //если уперлись в чужую фишку
             //и за ней есть пустое место, то это наша жертва
-            if (//board[distance * newY - y * (distance - 1)][distance * x - x * (distance - 1)].value != ''&&
-                board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value.owner!=myowner
-                &&!board[(distance+1) * y - myy * distance][(distance + 1) * x - myx * distance].unreacheble
-                &&board[(distance+1) * y - myy * distance][(distance + 1) * x - myx * distance].value == '' )
+            if ( //board[distance * newY - y * (distance - 1)][distance * x - x * (distance - 1)].value != ''&&
+                board[distance * y - myy * (distance - 1)][distance * x - myx * (distance - 1)].value.owner != myowner && !board[(distance + 1) * y - myy * distance][(distance + 1) * x - myx * distance].unreacheble && board[(distance + 1) * y - myy * distance][(distance + 1) * x - myx * distance].value == '')
                 return true;
         }
 
-        function canAttackAdditionalVictim(x, y, closeX, closeY,myowner, board) {
-            if (findVictim(x,y,x+1,y+1,myowner, board,closeX,closeY)) return true;
-            if (findVictim(x,y,x+1,y-1,myowner, board,closeX,closeY)) return true;
-            if (findVictim(x,y,x-1,y+1,myowner, board,closeX,closeY)) return true;
-            if (findVictim(x,y,x-1,y-1,myowner, board,closeX,closeY)) return true;
+        function canAttackAdditionalVictim(x, y, closeX, closeY, myowner, board) {
+            if (findVictim(x, y, x + 1, y + 1, myowner, board, closeX, closeY)) return true;
+            if (findVictim(x, y, x + 1, y - 1, myowner, board, closeX, closeY)) return true;
+            if (findVictim(x, y, x - 1, y + 1, myowner, board, closeX, closeY)) return true;
+            if (findVictim(x, y, x - 1, y - 1, myowner, board, closeX, closeY)) return true;
             return false;
         }
 
@@ -208,20 +201,20 @@
             if (figure.mainDirrection > 0) {
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y + 1, board);
                 values = values.concat(values, priority);
-                values = values.concat(values,checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y + 1, board));
+                values = values.concat(values, checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y + 1, board));
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y - 1, board);
-                if (priority[0].priority == 2 || draught.type == 2) values = values.concat(values, priority);
+                if (draught.type == 2 || priority[0].priority == 2) values = values.concat(values, priority);
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y - 1, board);
-                if (priority[0].priority == 2 || draught.type == 2) values = values.concat(values, priority);
+                if (draught.type == 2 || priority[0].priority == 2) values = values.concat(values, priority);
             }
             if (figure.mainDirrection < 0) {
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y - 1, board);
                 values = values.concat(values, priority);
                 values = values.concat(values, checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y - 1, board));
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x + 1, figure.y + 1, board);
-                if (priority[0].priority == 2 || draught.type == 2) values = values.concat(values, priority);
+                if (draught.type == 2 || priority[0].priority == 2) values = values.concat(values, priority);
                 priority = checkPosition(figure.x, figure.y, figure.owner, figure.type, figure.x - 1, figure.y + 1, board);
-                if (priority[0].priority == 2 || draught.type == 2) values = values.concat(values, priority);
+                if (draught.type == 2 || priority[0].priority == 2) values = values.concat(values, priority);
             }
             return values;
         }
@@ -246,7 +239,10 @@
                 //ходят только атакующие
                 for (var i = 0; i < player.figures.length; i++) {
                     if (player.figures[i].movePriority.priority < 2) delete player.figures[i].movePriority;
-                    else {player.figures[i].canMove = true;moveCount++;}
+                    else {
+                        player.figures[i].canMove = true;
+                        moveCount++;
+                    }
                 }
             } else
             //если нет атакующих, то ходят все кто может
@@ -331,6 +327,13 @@
             }
         }
 
+        function quinBorn(y) {
+            if (y == 1 && selectedFigure.owner == 1 || y == 8 && selectedFigure.owner == 2) {
+                selectedFigure.type = 2;
+                selectedFigure.viewClass += ' quin';
+            }
+        }
+
         function makeMove(x, y, board) {
             if (checkMove(x, y, board)) {
                 board[selectedFigure.y][selectedFigure.x].value = '';
@@ -340,16 +343,14 @@
                 selectedFigure.y = y;
                 board[selectedFigure.y][selectedFigure.x].value = selectedFigure;
                 cleanPossibleMoves(board);
-//https://www.gambler.ru/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D1%85_%D1%88%D0%B0%D1%88%D0%B5%D0%BA
-// Если обычная шашка достигает последней горизонтали в результате боя шашки противника 
-// (где ей полагается превращаться в дамку), и если ей предоставляется возможность дальнейшего 
-// взятия вражеских шашек, то она обязана тем же ходом продолжать бой, но уже на правах дамки. 
+                quinBorn(y);
+                //https://www.gambler.ru/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D1%85_%D1%88%D0%B0%D1%88%D0%B5%D0%BA
+                // Если обычная шашка достигает последней горизонтали в результате боя шашки противника 
+                // (где ей полагается превращаться в дамку), и если ей предоставляется возможность дальнейшего 
+                // взятия вражеских шашек, то она обязана тем же ходом продолжать бой, но уже на правах дамки. 
                 if (selectedFigure.attack) {
                     cleanDestroyedDaughts(old_x, old_y, x, y, board);
-                    if (y==1&&selectedFigure.owner==1||y==8&&selectedFigure.owner==2){
-                        selectedFigure.type = 2;
-                        selectedFigure.viewClass+=' quin';
-                    }
+                    
                     //playerMove.save()
                     clearFigures(playerMove ? playerMove : playera, selectedFigure);
                     showDraughtPosibleMovies(selectedFigure, board);
