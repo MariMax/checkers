@@ -36,31 +36,6 @@
             return draughts;
         }
 
-        // function makeDraughts(owner, mainDirrection) {
-        //     var draughts = [];
-        //     var x, y, base;
-        //     base = owner == 2 ? 1 : 6;
-
-        //     if (owner == 1) {
-        //         // draughts.push(makeDraught(owner, mainDirrection, 5, 4));
-        //         draughts.push(makeDraught(owner, mainDirrection, 5, 4));
-        //     }
-        //     if (owner == 2) {
-        //         // draughts.push(makeDraught(owner, mainDirrection, 2, 5));
-        //         // draughts.push(makeDraught(owner, mainDirrection, 4, 5));
-        //         // draughts.push(makeDraught(owner, mainDirrection, 6, 3));
-        //         draughts.push(makeDraught(owner, mainDirrection, 2, 5));
-        //         draughts.push(makeDraught(owner, mainDirrection, 4, 5));
-        //         draughts.push(makeDraught(owner, mainDirrection, 6, 5));
-        //         draughts.push(makeDraught(owner, mainDirrection, 6, 7));
-        //         draughts.push(makeDraught(owner, mainDirrection, 6, 3));
-        //         draughts.push(makeDraught(owner, mainDirrection, 4, 3));
-        //     }
-
-
-        //     return draughts;
-        // }
-
         function fillBoard(player1, player2, board) {
             fillForPlayer(player1, board);
             fillForPlayer(player2, board);
@@ -350,8 +325,6 @@
                 // взятия вражеских шашек, то она обязана тем же ходом продолжать бой, но уже на правах дамки. 
                 if (selectedFigure.attack) {
                     cleanDestroyedDaughts(old_x, old_y, x, y, board);
-                    
-                    //playerMove.save()
                     clearFigures(playerMove ? playerMove : playera, selectedFigure);
                     showDraughtPosibleMovies(selectedFigure, board);
                     if (selectedFigure.attack) {

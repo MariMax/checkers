@@ -8,19 +8,18 @@
                 scope:{
                     player:'='
                 },
-                controller: ['$scope', 'communicationModule','dataModel', ctrlHandler]
+                controller: ['$scope', ctrlHandler]
             };
 
-            function ctrlHandler(s, communicationModule,dataModel) {
+            function ctrlHandler(s) {
 
-                communicationModule.channel.on('start-game', function() {
+                s.$on('start-game', function() {
                     s.cantChangeName = true;
-                    dataModel.save();
-                }).offWhen(s);
+                });
 
-                communicationModule.channel.on('restart-game', function() {
+                s.$on('restart-game', function() {
                     s.cantChangeName = false;
-                }).offWhen(s);
+                });
             }
         }
     )

@@ -5,19 +5,22 @@
                 restrict: 'A',
                 replace: true,
                 templateUrl: "js/mainApp/views/board.html",
-                controller: ['$scope','dataModel', ctrlHandler]
+                controller: ['$scope','dataModel','serverModel', ctrlHandler]
             };
 
-            function ctrlHandler(s,dataModel) {
+            function ctrlHandler(s,dataModel,serverModel) {
                 s.board = dataModel.data.board;
 
                 s.moveHandler = function(x,y){
-                    var winner = dataModel.gameLogic(x,y,dataModel.data.player1, dataModel.data.player2, dataModel.data.board)
+                    var winner = serverModel.moveHandler(x,y,dataModel.data.player1, dataModel.data.player2, dataModel.data.board);
                     if (winner){
                         winner.showVictoryFlag();
                         dataModel.data.player1.stopMove();
                         dataModel.data.player2.stopMove();
+                        serverModel.showVictory(winner);
                     }
+                    serverModel.saveState(dataModel.data.player1,dataModel.data.player2);
+                    serverModel.moveDone(dataModel.data.player1,dataModel.data.player2,dataModel.data.board);
                 }
             }
         }

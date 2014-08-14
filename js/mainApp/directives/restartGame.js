@@ -5,13 +5,12 @@
                 restrict: 'A',
                 replace: true,
                 templateUrl: "js/mainApp/views/restartGame.html",
-                controller: ['$scope', 'communicationModule','dataModel', ctrlHandler]
+                controller: ['$scope', 'serverModel', ctrlHandler]
             };
 
-            function ctrlHandler(s, communicationModule,dataModel) {
+            function ctrlHandler(s, serverModel) {
                 s.restartGame = function() {
-                    communicationModule.channel.broadcast('restart-game');
-                    dataModel.clearData();
+                    serverModel.restartGame();
                 }
             }
         }
