@@ -43,7 +43,8 @@
             clearData: clearData,
             clearLastGameData: clearLastGameData,
             setGame: setGame,
-            data: data
+            data: data,
+            setBoard: setBoard
         }
     }
 

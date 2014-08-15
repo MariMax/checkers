@@ -42,7 +42,7 @@
             moveDone:function(player1,player2,board){
                 dataModel.data.player1 = player1;
                 dataModel.data.player2 = player2;
-                dataModel.data.setBoard(board);
+                dataModel.setBoard(board);
             },
             showVictory:function(winner){
                 $rootScope.$broadcast('victory',winner);
