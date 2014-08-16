@@ -51,7 +51,6 @@ gulp.task("url", function() {
         .pipe(open("./app/index.html", options));
 });
 
-
 gulp.task('default', function() {
     gulp.run('connect', 'stylus', 'url', 'watch');
 });
