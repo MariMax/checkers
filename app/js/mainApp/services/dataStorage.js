@@ -19,7 +19,7 @@
         }
 
         dataStorage.drop = function(key) {
-            dataStorage.add(key, '');
+            localStorageService.add(key, '');
         }
 
         return dataStorage;
