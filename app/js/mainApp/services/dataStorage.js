@@ -13,7 +13,7 @@
             try {
                 var value = localStorageService.get(key);
             } catch (e) {
-                token = null
+                value = null
             }
             return value;
         }
