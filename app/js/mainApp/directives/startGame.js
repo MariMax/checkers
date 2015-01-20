@@ -4,7 +4,7 @@
             return {
                 restrict: 'A',
                 replace: true,
-                templateUrl: "js/mainApp/views/startGame.html",
+                templateUrl: "app/js/mainApp/views/startGame.html",
                 controller: ['$scope', 'configuration','serverModel','$rootScope', ctrlHandler]
             };
 
