@@ -33,8 +33,8 @@
         function init() {
             board.initEmptyBoard();
             return {
-                player1: playerModel.create('Игрок №1'),
-                player2: playerModel.create('Игрок №2'),
+                player1: playerModel.create('Player 1'),
+                player2: playerModel.create('Player 2'),
                 board: exportBoard
             }
         }
