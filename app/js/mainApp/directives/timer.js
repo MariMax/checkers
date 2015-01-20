@@ -4,7 +4,7 @@
             return {
                 restrict: 'A',
                 replace: true,
-                templateUrl: "js/mainApp/views/timer.html",
+                templateUrl: "app/js/mainApp/views/timer.html",
                 scope: {
                     player: '='
                 }
