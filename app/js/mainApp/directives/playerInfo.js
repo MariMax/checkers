@@ -4,7 +4,7 @@
             return {
                 restrict: 'A',
                 replace: true,
-                templateUrl: "js/mainApp/views/playerInfo.html",
+                templateUrl: "app/js/mainApp/views/playerInfo.html",
                 scope:{
                     player:'='
                 },
