@@ -4,7 +4,7 @@
             return {
                 restrict: 'A',
                 replace: true,
-                templateUrl: "js/mainApp/views/board.html",
+                templateUrl: "app/js/mainApp/views/board.html",
                 controller: ['$scope','dataModel','serverModel', ctrlHandler]
             };
 
